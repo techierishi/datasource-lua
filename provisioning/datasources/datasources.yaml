@@ -1,0 +1,11 @@
+apiVersion: 1
+
+datasources:
+  - name: Lua Query
+    type: grafana-lua-datasource
+    access: proxy
+    isDefault: true
+    orgId: 1
+    version: 1
+    editable: true
+    uid: U9sW5bank
