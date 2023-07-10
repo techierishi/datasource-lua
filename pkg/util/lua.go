@@ -9,7 +9,34 @@ import (
 	ljson "layeh.com/gopher-json"
 )
 
-func RunLua(luaCode string) (*string, error) {
+func printToGo(L *lua.LState) int {
+	top := L.GetTop()
+	args := make([]interface{}, top)
+
+	for i := 1; i <= top; i++ {
+		args[i-1] = L.Get(i).String()
+	}
+	fmt.Println(args...)
+	return 0
+}
+
+func RunLuaScript(luaCode string) (*string, error) {
+
+	L := lua.NewState()
+	defer L.Close()
+
+	L.SetGlobal("print", L.NewFunction(printToGo))
+
+	err := L.DoString(luaCode)
+	if err != nil {
+		fmt.Println("Error executing Lua script:", err)
+		return nil, err
+	}
+
+	return nil, nil
+}
+
+func RunLuaFunc(luaCode string) (*string, error) {
 	L := lua.NewState()
 	defer L.Close()
 

@@ -13,6 +13,7 @@ export function QueryEditor(props: EditorProps): ReactElement {
   const styles = useStyles2(getStyles);
 
   const { loading, queryTypes, error } = useQueryTypes(datasource);
+
   const queryType = useSelectableValue(query.queryType);
 
   const onChangeQueryType = useChangeSelectableValue(props, {

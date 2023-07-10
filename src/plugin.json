@@ -7,9 +7,9 @@
   "backend": true,
   "executable": "gpx_basic_datasource",
   "info": {
-    "description": "Showcase how to build a basic datasource plugin",
+    "description": "Use Lua as query",
     "author": {
-      "name": "Your Name"
+      "name": "Rishikesh Jha"
     },
     "keywords": ["datasource"],
     "logos": {

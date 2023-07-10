@@ -15,3 +15,16 @@ func newLuaTableFrame(query backend.DataQuery, values map[string][]string) *data
 
 	return data.NewFrame("data", fields...)
 }
+
+func newLuaLogFrame(query backend.DataQuery, values map[string][]string) *data.Frame {
+
+	fields := []*data.Field{}
+
+	for k, v := range values {
+		fields = append(fields, data.NewField(k, data.Labels{}, v))
+	}
+
+	frame := data.NewFrame("data", fields...)
+
+	return frame
+}
