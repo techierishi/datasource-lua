@@ -11,6 +11,8 @@ import (
 )
 
 func NewDataFrame(query backend.DataQuery, qm models.QueryModel) (*data.Frame, *backend.DataResponse) {
+
+	utl.Log.Println("QueryType ", query.QueryType)
 	switch query.QueryType {
 	case Table:
 		return processTableQuery(qm, query)
@@ -22,9 +24,10 @@ func NewDataFrame(query backend.DataQuery, qm models.QueryModel) (*data.Frame, *
 }
 
 func processLogQuery(qm models.QueryModel, query backend.DataQuery) (*data.Frame, *backend.DataResponse) {
-	finalData := make(map[string][]string)
+	lr := utl.LuaRunner{}
+	stdOut, _ := lr.RunLuaScript(qm.RawQuery)
 
-	frame := newLuaLogFrame(query, finalData)
+	frame := newLuaLogFrame(stdOut)
 
 	frame.Meta = &data.FrameMeta{
 		ExecutedQueryString:    qm.RawQuery,
@@ -34,7 +37,8 @@ func processLogQuery(qm models.QueryModel, query backend.DataQuery) (*data.Frame
 }
 
 func processTableQuery(qm models.QueryModel, query backend.DataQuery) (*data.Frame, *backend.DataResponse) {
-	resStr, err := utl.RunLuaFunc(qm.RawQuery)
+	lr := utl.LuaRunner{}
+	resStr, err := lr.RunLuaFunc(qm.RawQuery)
 	if err != nil {
 		backendRes := backend.ErrDataResponse(backend.StatusInternal, " Query run failed "+err.Error())
 		return nil, &backendRes

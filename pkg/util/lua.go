@@ -9,23 +9,35 @@ import (
 	ljson "layeh.com/gopher-json"
 )
 
-func printToGo(L *lua.LState) int {
+type LuaRunner struct {
+	Stdout []interface{}
+}
+
+func (lr *LuaRunner) printToGo(L *lua.LState) int {
 	top := L.GetTop()
 	args := make([]interface{}, top)
 
 	for i := 1; i <= top; i++ {
 		args[i-1] = L.Get(i).String()
 	}
-	fmt.Println(args...)
+	lr.Stdout = append(lr.Stdout, args...)
 	return 0
 }
 
-func RunLuaScript(luaCode string) (*string, error) {
+func (lr *LuaRunner) loadModules(L *lua.LState) {
+	L.PreloadModule("http", lhttp.NewHttpModule(&http.Client{}).Loader)
+	ljson.Preload(L)
+}
+
+func (lr *LuaRunner) RunLuaScript(luaCode string) ([]interface{}, error) {
 
 	L := lua.NewState()
 	defer L.Close()
 
-	L.SetGlobal("print", L.NewFunction(printToGo))
+	// Preload modules
+	lr.loadModules(L)
+
+	L.SetGlobal("print", L.NewFunction(lr.printToGo))
 
 	err := L.DoString(luaCode)
 	if err != nil {
@@ -33,16 +45,17 @@ func RunLuaScript(luaCode string) (*string, error) {
 		return nil, err
 	}
 
-	return nil, nil
+	Log.Println(lr.Stdout...)
+
+	return lr.Stdout, nil
 }
 
-func RunLuaFunc(luaCode string) (*string, error) {
+func (lr *LuaRunner) RunLuaFunc(luaCode string) (*string, error) {
 	L := lua.NewState()
 	defer L.Close()
 
 	// Preload modules
-	L.PreloadModule("http", lhttp.NewHttpModule(&http.Client{}).Loader)
-	ljson.Preload(L)
+	lr.loadModules(L)
 
 	err := L.DoString(luaCode)
 	if err != nil {

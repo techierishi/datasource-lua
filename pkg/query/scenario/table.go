@@ -1,8 +1,11 @@
 package scenario
 
 import (
+	"fmt"
+
 	"github.com/grafana/grafana-plugin-sdk-go/backend"
 	"github.com/grafana/grafana-plugin-sdk-go/data"
+	utl "github.com/grafana/lua-datasource/pkg/util"
 )
 
 func newLuaTableFrame(query backend.DataQuery, values map[string][]string) *data.Frame {
@@ -16,13 +19,17 @@ func newLuaTableFrame(query backend.DataQuery, values map[string][]string) *data
 	return data.NewFrame("data", fields...)
 }
 
-func newLuaLogFrame(query backend.DataQuery, values map[string][]string) *data.Frame {
+func newLuaLogFrame(values []interface{}) *data.Frame {
 
 	fields := []*data.Field{}
 
-	for k, v := range values {
-		fields = append(fields, data.NewField(k, data.Labels{}, v))
+	strings := make([]string, len(values))
+	for i, v := range values {
+		strings[i] = fmt.Sprintf("%v", v)
 	}
+
+	utl.Log.Println("strings", strings)
+	fields = append(fields, data.NewField("log", data.Labels{}, strings))
 
 	frame := data.NewFrame("data", fields...)
 
