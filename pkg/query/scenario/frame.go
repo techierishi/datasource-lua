@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 
 	"github.com/grafana/grafana-plugin-sdk-go/backend"
+	"github.com/grafana/grafana-plugin-sdk-go/backend/log"
 	"github.com/grafana/grafana-plugin-sdk-go/data"
 	"github.com/techierishi/luaquery-datasource/pkg/models"
 
@@ -12,7 +13,7 @@ import (
 
 func NewDataFrame(query backend.DataQuery, qm models.QueryModel) (*data.Frame, *backend.DataResponse) {
 
-	utl.Log.Println("QueryType ", query.QueryType)
+	log.DefaultLogger.Info("QueryType " + query.QueryType)
 	switch query.QueryType {
 	case Table:
 		return processTableQuery(qm, query)
@@ -43,7 +44,7 @@ func processTableQuery(qm models.QueryModel, query backend.DataQuery) (*data.Fra
 		backendRes := backend.ErrDataResponse(backend.StatusInternal, " Query run failed "+err.Error())
 		return nil, &backendRes
 	}
-	utl.Log.Println("Response Data ", *resStr)
+	log.DefaultLogger.Debug("Response Data " + *resStr)
 
 	var jsonData []map[string]string
 

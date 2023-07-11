@@ -5,7 +5,6 @@ import (
 
 	"github.com/grafana/grafana-plugin-sdk-go/backend"
 	"github.com/grafana/grafana-plugin-sdk-go/data"
-	utl "github.com/techierishi/luaquery-datasource/pkg/util"
 )
 
 func newLuaTableFrame(query backend.DataQuery, values map[string][]string) *data.Frame {
@@ -28,7 +27,6 @@ func newLuaLogFrame(values []interface{}) *data.Frame {
 		strings[i] = fmt.Sprintf("%v", v)
 	}
 
-	utl.Log.Println("strings", strings)
 	fields = append(fields, data.NewField("log", data.Labels{}, strings))
 
 	frame := data.NewFrame("data", fields...)

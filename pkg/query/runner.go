@@ -5,9 +5,9 @@ import (
 	"encoding/json"
 
 	"github.com/grafana/grafana-plugin-sdk-go/backend"
+	"github.com/grafana/grafana-plugin-sdk-go/backend/log"
 	"github.com/techierishi/luaquery-datasource/pkg/models"
 	"github.com/techierishi/luaquery-datasource/pkg/query/scenario"
-	utl "github.com/techierishi/luaquery-datasource/pkg/util"
 )
 
 func RunQuery(_ context.Context, settings models.PluginSettings, query backend.DataQuery) backend.DataResponse {
@@ -21,7 +21,7 @@ func RunQuery(_ context.Context, settings models.PluginSettings, query backend.D
 		return backend.ErrDataResponse(backend.StatusBadRequest, "json unmarshal: "+err.Error())
 	}
 
-	utl.Log.Println("Query to run: ", qm.RawQuery)
+	log.DefaultLogger.Info("Query to run: ", qm.RawQuery)
 
 	frame, backendResponse := scenario.NewDataFrame(query, qm)
 	if backendResponse != nil {

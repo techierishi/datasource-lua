@@ -45,8 +45,6 @@ func (lr *LuaRunner) RunLuaScript(luaCode string) ([]interface{}, error) {
 		return nil, err
 	}
 
-	Log.Println(lr.Stdout...)
-
 	return lr.Stdout, nil
 }
 
