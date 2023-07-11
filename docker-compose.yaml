@@ -2,7 +2,7 @@ version: '3.0'
 
 services:
   grafana:
-    container_name: 'lua-datasource'
+    container_name: 'luaquery-datasource'
     build:
       context: ./.config
       args:
@@ -11,5 +11,5 @@ services:
     ports:
       - 3000:3000/tcp
     volumes:
-      - ./dist:/var/lib/grafana/plugins/lua-datasource
+      - ./dist:/var/lib/grafana/plugins/luaquery-datasource
       - ./provisioning:/etc/grafana/provisioning

@@ -1,5 +1,19 @@
 # Lua as Query
 
+
+## Usage
+
+- Install this plugin
+- Use "Lua Query" as data source
+- Write Lua code in the Query editor
+- Main sure to have a `main` function in your lua code which return array of maps.
+- Change to "Table" to see the data in table view
+
+Note:
+- Select "Log" from dropdown below code editor to debug the code
+- Lua code only has `http` and `json` module pre loaded
+
+
 ### Frontend
 
 1. Install dependencies

@@ -6,7 +6,7 @@ import (
 
 	"github.com/grafana/grafana-plugin-sdk-go/backend"
 	"github.com/grafana/grafana-plugin-sdk-go/backend/resource/httpadapter"
-	"github.com/grafana/lua-datasource/pkg/query/scenario"
+	"github.com/grafana/luaquery-datasource/pkg/query/scenario"
 )
 
 func newResourceHandler() backend.CallResourceHandler {

@@ -1,5 +1,5 @@
 {
-  "name": "lua-datasource",
+  "name": "luaquery-datasource",
   "version": "1.0.0",
   "description": "Use lua script as query language",
   "scripts": {
