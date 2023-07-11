@@ -1,5 +1,8 @@
 # Lua as Query
 
+Use lua script as query language
+
+![image](screenshot.png)
 
 ## Usage
 

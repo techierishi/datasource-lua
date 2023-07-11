@@ -5,7 +5,7 @@ import (
 
 	"github.com/grafana/grafana-plugin-sdk-go/backend"
 	"github.com/grafana/grafana-plugin-sdk-go/data"
-	utl "github.com/grafana/luaquery-datasource/pkg/util"
+	utl "github.com/techierishi/luaquery-datasource/pkg/util"
 )
 
 func newLuaTableFrame(query backend.DataQuery, values map[string][]string) *data.Frame {

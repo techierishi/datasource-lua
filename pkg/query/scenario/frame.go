@@ -5,9 +5,9 @@ import (
 
 	"github.com/grafana/grafana-plugin-sdk-go/backend"
 	"github.com/grafana/grafana-plugin-sdk-go/data"
-	"github.com/grafana/luaquery-datasource/pkg/models"
+	"github.com/techierishi/luaquery-datasource/pkg/models"
 
-	utl "github.com/grafana/luaquery-datasource/pkg/util"
+	utl "github.com/techierishi/luaquery-datasource/pkg/util"
 )
 
 func NewDataFrame(query backend.DataQuery, qm models.QueryModel) (*data.Frame, *backend.DataResponse) {

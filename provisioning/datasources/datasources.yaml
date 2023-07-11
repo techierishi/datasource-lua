@@ -2,7 +2,7 @@ apiVersion: 1
 
 datasources:
   - name: Lua Query
-    type: grafana-luaquery-datasource
+    type: techierishi-luaquery-datasource
     access: proxy
     isDefault: true
     orgId: 1

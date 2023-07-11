@@ -5,8 +5,8 @@ import (
 
 	"github.com/grafana/grafana-plugin-sdk-go/backend"
 	"github.com/grafana/grafana-plugin-sdk-go/backend/instancemgmt"
-	"github.com/grafana/luaquery-datasource/pkg/models"
-	"github.com/grafana/luaquery-datasource/pkg/query"
+	"github.com/techierishi/luaquery-datasource/pkg/models"
+	"github.com/techierishi/luaquery-datasource/pkg/query"
 )
 
 // Make sure Datasource implements required interfaces. This is important to do

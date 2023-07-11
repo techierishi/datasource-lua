@@ -1,4 +1,4 @@
-module github.com/grafana/luaquery-datasource
+module github.com/techierishi/luaquery-datasource
 
 go 1.20
 

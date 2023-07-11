@@ -5,9 +5,9 @@ import (
 	"encoding/json"
 
 	"github.com/grafana/grafana-plugin-sdk-go/backend"
-	"github.com/grafana/luaquery-datasource/pkg/models"
-	"github.com/grafana/luaquery-datasource/pkg/query/scenario"
-	utl "github.com/grafana/luaquery-datasource/pkg/util"
+	"github.com/techierishi/luaquery-datasource/pkg/models"
+	"github.com/techierishi/luaquery-datasource/pkg/query/scenario"
+	utl "github.com/techierishi/luaquery-datasource/pkg/util"
 )
 
 func RunQuery(_ context.Context, settings models.PluginSettings, query backend.DataQuery) backend.DataResponse {

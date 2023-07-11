@@ -1,11 +1,11 @@
 {
   "$schema": "https://raw.githubusercontent.com/grafana/grafana/main/docs/sources/developers/plugins/plugin.schema.json",
   "type": "datasource",
-  "name": "Basic Datasource",
+  "name": "Lua Query Datasource",
   "id": "techierishi-luaquery-datasource",
   "metrics": true,
   "backend": true,
-  "executable": "gpx_basic_datasource",
+  "executable": "luaquery-datasource",
   "info": {
     "description": "Use Lua as query",
     "author": {
@@ -19,11 +19,11 @@
     "links": [
       {
         "name": "Website",
-        "url": "https://github.com/grafana/grafana-starter-datasource"
+        "url": "https://github.com/techierishi/datasource-lua"
       },
       {
         "name": "License",
-        "url": "https://github.com/grafana/grafana-starter-datasource/blob/master/LICENSE"
+        "url": "https://github.com/techierishi/datasource-lua/blob/master/LICENSE"
       }
     ],
     "screenshots": [],
