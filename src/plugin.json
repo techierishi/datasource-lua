@@ -26,7 +26,12 @@
         "url": "https://github.com/techierishi/datasource-lua/blob/master/LICENSE"
       }
     ],
-    "screenshots": [],
+    "screenshots": [
+      {
+        "name": "Lua query data source",
+        "path": "screenshot.png"
+      }
+    ],
     "version": "%VERSION%",
     "updated": "%TODAY%"
   },
