@@ -8,6 +8,7 @@ import { useChangeSelectableValue } from './useChangeSelectableValue';
 import type { EditorProps } from './types';
 import { useChangeString } from './useChangeString';
 
+
 export function QueryEditor(props: EditorProps): ReactElement {
   const { datasource, query } = props;
   const styles = useStyles2(getStyles);
@@ -25,6 +26,7 @@ export function QueryEditor(props: EditorProps): ReactElement {
     propertyName: 'rawQuery',
     runQuery: true,
   });
+
 
   return (
     <>

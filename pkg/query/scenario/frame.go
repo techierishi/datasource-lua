@@ -2,13 +2,12 @@ package scenario
 
 import (
 	"encoding/json"
+	"errors"
 
 	"github.com/grafana/grafana-plugin-sdk-go/backend"
 	"github.com/grafana/grafana-plugin-sdk-go/backend/log"
 	"github.com/grafana/grafana-plugin-sdk-go/data"
 	"github.com/techierishi/luaquery-datasource/pkg/models"
-
-	utl "github.com/techierishi/luaquery-datasource/pkg/util"
 )
 
 func NewDataFrame(query backend.DataQuery, qm models.QueryModel) (*data.Frame, *backend.DataResponse) {
@@ -25,10 +24,8 @@ func NewDataFrame(query backend.DataQuery, qm models.QueryModel) (*data.Frame, *
 }
 
 func processLogQuery(qm models.QueryModel, query backend.DataQuery) (*data.Frame, *backend.DataResponse) {
-	lr := utl.LuaRunner{}
-	stdOut, _ := lr.RunLuaScript(qm.RawQuery)
 
-	frame := newLuaLogFrame(stdOut)
+	frame := newLuaLogFrame(nil)
 
 	frame.Meta = &data.FrameMeta{
 		ExecutedQueryString:    qm.RawQuery,
@@ -38,10 +35,10 @@ func processLogQuery(qm models.QueryModel, query backend.DataQuery) (*data.Frame
 }
 
 func processTableQuery(qm models.QueryModel, query backend.DataQuery) (*data.Frame, *backend.DataResponse) {
-	lr := utl.LuaRunner{}
-	resStr, err := lr.RunLuaFunc(qm.RawQuery)
+	strp := qm.RawQuery
+	resStr, err := &strp, errors.New("Test error")
 	if err != nil {
-		backendRes := backend.ErrDataResponse(backend.StatusInternal, " Query run failed "+err.Error())
+		backendRes := backend.ErrDataResponse(backend.StatusInternal, strp+" -- Query run failed "+err.Error())
 		return nil, &backendRes
 	}
 	log.DefaultLogger.Debug("Response Data " + *resStr)

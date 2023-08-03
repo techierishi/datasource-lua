@@ -196,6 +196,14 @@ const config = async (env): Promise<Configuration> => ({
     // handle resolving "rootDir" paths
     modules: [path.resolve(process.cwd(), 'src'), 'node_modules'],
     unsafeCache: true,
+    fallback: {
+      path: false,
+      fs: false,
+      child_process: false,
+      crypto: false,
+      url: false,
+      module: false
+    }
   },
 });
 
